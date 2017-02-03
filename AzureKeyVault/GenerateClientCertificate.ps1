@@ -6,7 +6,7 @@
 [string]$CertStoreLocation = "Cert:\CurrentUser\My",
 
 [parameter(Mandatory=$false, ParameterSetName="GenerateCertificate")]
-[DateTime]$NotBefore = [DateTime]::Now.Date,
+[DateTime]$NotBefore = [DateTime]::Now,
 
 [parameter(Mandatory=$false, ParameterSetName="GenerateCertificate")]
 [DateTime]$NotAfter = $NotBefore.AddYears(1),
