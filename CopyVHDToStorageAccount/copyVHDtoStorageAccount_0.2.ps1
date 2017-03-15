@@ -67,7 +67,7 @@ workflow Copy-VHD-StorageAccounts
 		$copyStatus = $copyHandle | Get-AzureStorageBlobCopyState 
 		$perComplete = ($copyStatus.BytesCopied/$copyStatus.TotalBytes)*100
 		Write-Progress -Activity "Copying blob..." -status "Percentage Complete" -percentComplete "$perComplete"
-		Start-Sleep 10
+		Start-Sleep -Seconds 60
 		}
 
 		if($copyStatus.Status -eq "Success")
