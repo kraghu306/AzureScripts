@@ -1,4 +1,3 @@
-
 workflow Copy-VHD-StorageAccounts
 {
     #The name of the Automation Credential Asset this runbook will use to authenticate to Azure.
@@ -31,7 +30,7 @@ workflow Copy-VHD-StorageAccounts
 	 #source Storage Account Context
 	 $SrcAzStrCtx = New-AzureStorageContext $storageAccountName -StorageAccountKey $AzStrKey[0].Value
 	 
-	 $sourceVhdName = (Get-AzureRmStorageAccount -Name $labStorageAccountName -ResourceGroupName $labStorageAccount.ResourceGroupName | Get-AzureStorageContainer | where {$_.Name -eq 'vhds'} | Get-AzureStorageBlob).Name
+	 $sourceVhdName = (Get-AzureRmStorageAccount -Name $labStorageAccountName -ResourceGroupName $labStorageAccount.ResourceGroupName | Get-AzureStorageContainer | where {$_.Name -eq 'mastervhds'} | Get-AzureStorageBlob).Name
 
 	 $listlabs = $listOflabsName.Split(",")
 	 
@@ -53,7 +52,7 @@ workflow Copy-VHD-StorageAccounts
 	  
 	  $vhdFileName = $sourceUri.Split("/")[4]
 	  
-	  $copyHandle = Start-AzureStorageBlobCopy -srcUri $sourcevhdUri -SrcContext $SrcAzStrCtx -DestContainer 'vhds' -DestBlob $vhdFileName -DestContext $DesAzStrCtx -Force
+	  $copyHandle = Start-AzureStorageBlobCopy -srcUri $sourcevhdUri -SrcContext $SrcAzStrCtx -DestContainer 'customvhds' -DestBlob $vhdFileName -DestContext $DesAzStrCtx -Force
 
 	  Write-Host "Copy started..."
 
